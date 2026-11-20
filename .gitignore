@@ -5,6 +5,7 @@ coverage/
 .vite/
 .wrangler/
 .playwright-mcp/
+.vercel/
 
 # Local environment and credentials
 .env

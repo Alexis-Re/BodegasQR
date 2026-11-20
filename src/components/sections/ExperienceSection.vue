@@ -1,12 +1,29 @@
 <script setup>
-defineProps({
+import { computed } from 'vue'
+
+const props = defineProps({
   tenant: { type: Object, required: true },
   section: { type: Object, required: true }
+})
+
+const backgroundStyle = computed(() => {
+  if (!props.section.backgroundImage) return undefined
+
+  return {
+    '--experience-background-image': `url("${props.section.backgroundImage}")`
+  }
 })
 </script>
 
 <template>
-  <section :id="section.id" class="content-section experience-section" :aria-labelledby="`${section.id}-heading`" v-reveal>
+  <section
+    :id="section.id"
+    class="content-section experience-section"
+    :class="{ 'experience-section--image': section.backgroundImage }"
+    :style="backgroundStyle"
+    :aria-labelledby="`${section.id}-heading`"
+    v-reveal
+  >
     <div class="page-frame">
       <div class="section-intro">
         <p class="eyebrow">{{ section.eyebrow }}</p>

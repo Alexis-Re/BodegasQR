@@ -15,7 +15,7 @@ El navegador nunca debe acceder directamente a Google Sheets ni recibir secretos
 ## Stack y comandos
 
 - Vue 3 con componentes Single File (`.vue`), Vue Router 4, Vite 6, JavaScript ES modules y CSS propio.
-- La función `functions/api/register.js` sigue la interfaz de Cloudflare Pages Functions; confirma que el entorno de desarrollo y hosting ejecute esa función antes de dar por operativa la ruta `/api/register`.
+- `functions/api/register.js` contiene la lógica compartida y sigue la interfaz de Cloudflare Pages Functions. `api/register.js` es el adaptador para Vercel; mantenerlos compatibles al modificar el endpoint.
 - Comandos disponibles en `package.json`:
   - `npm install`: instalar dependencias.
   - `npm run dev`: iniciar Vite.
@@ -32,7 +32,9 @@ El navegador nunca debe acceder directamente a Google Sheets ni recibir secretos
 - `src/components/layout/`, `src/components/sections/`, `src/components/forms/`: composición visual, bloques de landing y formularios.
 - `src/services/registrationApi.js`: envío del payload y tratamiento de respuestas del endpoint.
 - `src/styles/base.css` y `src/directives/reveal.js`: estilos compartidos y revelado de contenido al desplazarse.
-- `functions/api/register.js`: validación del request, firma HMAC y reenvío a Apps Script.
+- `functions/api/register.js`: validación del request, firma HMAC y reenvío a Apps Script; conserva el handler de Cloudflare Pages.
+- `api/register.js`: adaptador Web Handler de Vercel que pasa variables de entorno al handler compartido.
+- `vercel.json`: fallback SPA para URLs directas de Vue Router.
 - `backend/apps-script/Code.js`: verificación de firma, deduplicación y escritura en la planilla de la bodega.
 - `docs/google-drive-integration.md` y `backend/apps-script/README.md`: configuración y despliegue de la integración.
 - `public/tenants/<slug>/`: recursos públicos de cada bodega. No guardar aquí información privada.
@@ -44,14 +46,14 @@ La configuración de una bodega que consumen las páginas incluye `slug`, `name`
 - La configuración de bodegas, los layouts y las ocho secciones ya están implementados. `npm run build` pasó en la revisión actual; mantenerlo verde al realizar cambios.
 - `RegistrationForm.vue` inicializa `consent` en `false` y su reset usa los valores iniciales. Añadir pruebas para consentimiento requerido y reinicio tras un envío exitoso.
 - La documentación de `docs/google-drive-integration.md` enumera 11 columnas, mientras `backend/apps-script/Code.js` crea actualmente 19. Alinear el esquema documentado con la escritura real.
-- `package.json` no define pruebas automatizadas y el servidor Vite no ejecuta por sí solo `functions/api/register.js`.
+- `package.json` no define pruebas automatizadas y el servidor Vite no ejecuta por sí solo las funciones de `api/` o `functions/`.
 
 ## Orden de trabajo para completar el proyecto
 
 1. **Conservar una aplicación compilable.** Completar las funciones visuales de cada sección según los datos y estilos del proyecto; no sustituirlas por mocks vacíos. Ejecutar `npm run build` tras cambios de frontend.
 2. **Probar el flujo del formulario.** Cubrir consentimiento requerido, consentimiento de marketing independiente, reinicio tras éxito, rechazo de payloads inválidos, errores de red y confirmación de persistencia.
 3. **Alinear el contrato del registro.** Mantener compatibles nombres, tipos, límites y reglas entre `RegistrationForm.vue`, `functions/api/register.js` y `backend/apps-script/Code.js`. Al cambiarlo, actualizar ambos README y la documentación de integración.
-4. **Hacer reproducible el desarrollo y despliegue.** Documentar cómo ejecutar localmente `/api/register` con el runtime compatible, las variables necesarias, el fallback SPA para rutas directas y los pasos de despliegue. Vite por sí solo no ejecuta la función del directorio `functions/`.
+4. **Hacer reproducible el desarrollo y despliegue.** Documentar cómo ejecutar localmente `/api/register` con el runtime compatible, las variables necesarias, el fallback SPA para rutas directas y los pasos de despliegue en Vercel o Cloudflare Pages. Vite por sí solo no ejecuta las funciones serverless.
 5. **Generar y validar QR fijos.** Usar URLs HTTPS estables y datos públicos (`location`, `qr` y `source`); preferir SVG para impresión y no incluir datos personales, secretos ni IDs de planillas. Generar los QR de producción solo después de validar el dominio y el registro de punta a punta.
 6. **Validar cada bodega antes de publicar.** Comprobar sus datos, recursos, ruta simple y landing; enviar un registro a su propia planilla; comprobar que un error de permisos no muestra éxito; imprimir el QR solo después de esa validación.
 

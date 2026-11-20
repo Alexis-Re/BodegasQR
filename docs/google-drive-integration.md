@@ -70,6 +70,10 @@ VITE_REGISTRATION_API_URL=/api/register
 
 El secreto se configura en el panel del proveedor de hosting, no en un archivo versionado.
 
+En Vercel, `api/register.js` adapta la función compartida a una Function del proveedor. Configurar `VITE_REGISTRATION_API_URL=/api/register`, `APPS_SCRIPT_URL` y `APPS_SCRIPT_SHARED_SECRET` en Project Settings > Environment Variables. Las dos variables `APPS_SCRIPT_*` deben estar disponibles solo en el servidor; no deben llevar prefijo `VITE_`.
+
+Para una demostración, guardar las variables de Apps Script en el entorno Preview y apuntar el slug de prueba a una planilla separada de las planillas de producción. No mostrar éxito hasta comprobar que el registro aparece en esa planilla.
+
 ## Despliegue de Apps Script
 
 1. Crear un proyecto de Apps Script en la cuenta operativa.

@@ -211,6 +211,7 @@ const bodegaAurora = {
         id: 'experiencias',
         navLabel: 'Experiencias',
         eyebrow: 'Una visita a tu ritmo',
+        backgroundImage: '/tenants/bodega-aurora/experiencia-visita.webp',
         title: 'Pequeños detalles que hacen especial el recorrido.',
         text:
           'Explora distintas formas de acercarte a la cultura del vino y al paisaje que la inspira.',

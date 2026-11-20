@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { sectionRegistry } from '../../config/sectionRegistry'
 import SiteFooter from './SiteFooter.vue'
@@ -13,6 +13,8 @@ const props = defineProps({
 
 const route = useRoute()
 const menuOpen = ref(false)
+const headerElement = ref(null)
+const menuToggle = ref(null)
 const navigationId = computed(() => `${props.tenant.slug}-main-navigation`)
 const navigationItems = computed(() =>
   props.tenant.sections.filter((section) => section.id && section.navLabel)
@@ -39,11 +41,32 @@ watch(
 function closeMenu() {
   menuOpen.value = false
 }
+
+function handleDocumentPointerDown(event) {
+  if (menuOpen.value && !headerElement.value?.contains(event.target)) {
+    closeMenu()
+  }
+}
+
+function handleEscape() {
+  if (!menuOpen.value) return
+
+  closeMenu()
+  menuToggle.value?.focus()
+}
+
+onMounted(() => {
+  document.addEventListener('pointerdown', handleDocumentPointerDown)
+})
+
+onBeforeUnmount(() => {
+  document.removeEventListener('pointerdown', handleDocumentPointerDown)
+})
 </script>
 
 <template>
   <div class="tenant-site" :style="themeStyle">
-    <header class="site-header" @keydown.esc="closeMenu">
+    <header ref="headerElement" class="site-header" @keydown.esc="handleEscape">
       <div class="page-frame site-header__inner">
         <a class="brand" href="#inicio" @click="closeMenu">
           <img :src="tenant.assets.logo" :alt="`Logo de ${tenant.name}`" />
@@ -59,6 +82,7 @@ function closeMenu() {
         </span>
 
         <button
+          ref="menuToggle"
           class="menu-toggle"
           type="button"
           :aria-expanded="menuOpen"
