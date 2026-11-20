@@ -1,0 +1,16 @@
+# Keep text files consistent across operating systems.
+* text=auto eol=lf
+
+# Preserve SVGs as normalized text.
+*.svg text eol=lf
+
+# Keep binary assets out of text normalization.
+*.gif binary
+*.ico binary
+*.jfif binary
+*.jpeg binary
+*.jpg binary
+*.png binary
+*.webp binary
+*.woff binary
+*.woff2 binary

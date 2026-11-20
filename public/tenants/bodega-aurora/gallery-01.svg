@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 850" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="essenceSky" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#91aca5"/>
+      <stop offset="1" stop-color="#e1c993"/>
+    </linearGradient>
+    <linearGradient id="essenceField" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#76865f"/>
+      <stop offset="1" stop-color="#274538"/>
+    </linearGradient>
+    <linearGradient id="essencePath" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#caa873"/>
+      <stop offset="1" stop-color="#866044"/>
+    </linearGradient>
+  </defs>
+  <rect width="700" height="850" fill="url(#essenceSky)"/>
+  <circle cx="520" cy="142" r="72" fill="#f5d89b" opacity=".78"/>
+  <path d="M0 420 130 310l110 56 130-96 145 112 115-78 140 87v459H0Z" fill="#6b7c66"/>
+  <path d="M0 530 190 428l145 63 158-113 207 117v355H0Z" fill="url(#essenceField)"/>
+  <path d="M308 850c-31-144-26-241 8-317 21-47 42-82 79-126 25 76 34 141 16 208-24 88-52 154-60 235Z" fill="url(#essencePath)"/>
+  <g fill="none" stroke="#dbc184" stroke-linecap="round" opacity=".82">
+    <path d="M-40 650 305 488M-20 740 305 540M18 850 306 604" stroke-width="10"/>
+    <path d="M740 638 405 494M720 740 398 550M690 850 387 603" stroke-width="10"/>
+  </g>
+  <g stroke="#2d4b3b" stroke-width="5" opacity=".8">
+    <path d="M86 520v180M175 479v205M548 470v214M637 512v190"/>
+  </g>
+  <g fill="#3c6248" opacity=".9">
+    <path d="M75 550c-35-28-50-54-45-79 36 8 54 32 45 79ZM96 586c38-23 64-27 82-11-23 29-50 34-82 11Z"/>
+    <path d="M552 515c-30-25-42-49-36-70 31 8 45 29 36 70ZM573 551c36-22 60-24 76-8-21 27-46 30-76 8Z"/>
+  </g>
+  <path d="M0 850h700" stroke="#d8bc80" stroke-width="3" opacity=".6"/>
+</svg>
