@@ -2809,6 +2809,12 @@ body {
     flex: 0 0 42px;
     place-content: center;
     gap: 4px;
+    width: 42px;
+    height: 42px;
+    padding: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.06);
   }
 
   .site-header__inner .menu-toggle span {
