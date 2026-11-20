@@ -9,18 +9,18 @@ npm install
 npm run dev
 ```
 
-La bodega ficticia disponible tiene dos recorridos:
+La bodega ficticia disponible tiene una página informativa y una ruta de registro directo:
 
 ```text
 /bodega/bodega-aurora
 /bodega/bodega-aurora/registro
 ```
 
-La primera ruta es la landing completa, compactada en cuatro bloques: hero, esencia, experiencia y reserva. La segunda es la version simple para visitantes que necesitan consultar la informacion basica y registrarse rapidamente.
+La primera ruta contiene información de la bodega. La segunda muestra el formulario al abrirse y es la que debe utilizar el QR. El sitio está orientado a registrar a quienes ya están realizando su visita.
 
 ## Estado del registro
 
-El registro de visitantes esta implementado con validacion del lado del cliente y del backend. Incluye datos de contacto, ciudad, pais, red social, intereses y origen de llegada. La ubicacion y el identificador del QR se pueden enviar mediante los parametros `location` y `qr`.
+El registro pide nombre, apellido, correo y teléfono. La ubicación y el identificador del QR se capturan mediante los parámetros `location` y `qr`; el consentimiento de marketing es opcional e independiente.
 
 Mientras no exista `VITE_REGISTRATION_API_URL`, la aplicacion informa que el backend no esta configurado y no confirma ningun registro.
 
@@ -56,12 +56,14 @@ APPS_SCRIPT_SHARED_SECRET=secreto-compartido-con-apps-script
 
 `APPS_SCRIPT_URL` y `APPS_SCRIPT_SHARED_SECRET` son variables solo del servidor: no usar el prefijo `VITE_` ni guardarlas en archivos versionados. En Apps Script deben existir `SHARED_SECRET` y la propiedad `TENANT_<SLUG_EN_MAYUSCULAS>_SHEET_ID`. Para una demostración, usar una planilla de prueba y configurar las variables de Vercel en el entorno Preview.
 
-Después del despliegue, comprobar ambas rutas directamente:
+Después del despliegue, comprobar que la entrada y las rutas directas funcionen:
 
 ```text
 /bodega/bodega-aurora
 /bodega/bodega-aurora/registro
 ```
+
+La ruta `/` redirige al registro de Aurora. Cada QR debe incluir el slug de su bodega y abrir directamente su ruta `/registro`.
 
 Una URL fija de muestra puede incluir los datos públicos del QR:
 

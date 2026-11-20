@@ -6,7 +6,7 @@ El formulario no escribe directamente en Google Drive desde el navegador. Cada p
 
 La aplicacion escribe en esa planilla mediante Google Apps Script. No hace falta exponer el Drive, la planilla ni sus credenciales al visitante.
 
-## Flujo de una solicitud
+## Flujo de un registro
 
 ```text
 Visitante
@@ -102,7 +102,17 @@ fields_json
 source
 consent
 request_id
+surname
+city
+country
+social_network
+social_handle
+interest
+discovery_source
+marketing_consent
 ```
+
+Las columnas de ciudad, país, redes, intereses y origen declarado se conservan por compatibilidad con registros anteriores. El formulario ya no recopila esos datos y las filas nuevas las dejan vacías. `fields_json` contiene los campos actuales del formulario y los metadatos del QR.
 
 Cada bodega mantiene sus propios registros en su propio archivo. La plataforma no necesita una hoja global con datos mezclados.
 
@@ -114,7 +124,7 @@ Antes de publicar una URL o imprimir un QR:
 2. Compartirla con la cuenta operativa.
 3. Registrar su propiedad `TENANT_<SLUG>_SHEET_ID`.
 4. Agregar su configuracion en `src/config/tenants/`.
-5. Probar la ruta simple `/bodega/<slug>/registro`.
+5. Probar desde un teléfono la ruta directa `/bodega/<slug>/registro`.
 6. Enviar un registro de prueba.
 7. Confirmar que aparece en la planilla correcta.
 8. Probar un error de permisos y comprobar que la web no muestra exito.

@@ -7,6 +7,9 @@ import { getTenantBySlug } from '../config/tenants'
 
 const route = useRoute()
 const tenant = computed(() => getTenantBySlug(route.params.slug))
+const registrationBackground = computed(
+  () => tenant.value?.assets.registrationHero || tenant.value?.assets.hero
+)
 
 const themeStyle = computed(() => {
   if (!tenant.value) return {}
@@ -46,57 +49,17 @@ watchEffect(() => {
     </header>
 
     <main>
-      <section id="informacion" class="simple-intro" v-reveal>
-        <div class="page-frame simple-intro__grid">
-          <div class="simple-intro__copy">
-            <p class="eyebrow"><span></span>Informacion de la bodega</p>
-            <h1>{{ tenant.name }}</h1>
-            <p class="simple-intro__description">{{ tenant.description }}</p>
-            <a class="button button--primary" href="#registro">Completar registro <span>-&gt;</span></a>
-          </div>
-          <div class="simple-intro__media">
-            <img
-              :src="tenant.assets.registrationHero || tenant.assets.hero"
-              :alt="tenant.assets.registrationHeroAlt || `Paisaje de ${tenant.name}`"
-              :style="tenant.assets.registrationHero ? { objectPosition: '68% center' } : undefined"
-            />
-            <div class="simple-intro__media-label">
-              <span>01</span>
-              <strong>Una visita<br />para recordar</strong>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="simple-details" v-reveal>
-        <div class="page-frame simple-details__grid">
-          <div>
-            <p class="eyebrow">Tu visita</p>
-            <h2>Todo empieza con un registro simple.</h2>
-          </div>
-          <dl class="simple-details__list">
-            <div>
-              <dt>Direccion</dt>
-              <dd>{{ tenant.contact.address }}</dd>
-            </div>
-            <div>
-              <dt>Atencion</dt>
-              <dd>{{ tenant.contact.schedule }}</dd>
-            </div>
-            <div>
-              <dt>Contacto</dt>
-              <dd>{{ tenant.contact.email }}</dd>
-            </div>
-          </dl>
-        </div>
-      </section>
-
-      <section id="registro" class="simple-registration" v-reveal>
-        <div class="page-frame simple-registration__grid">
-          <div class="simple-registration__copy">
+      <section
+        id="registro"
+        class="registration-page"
+        :style="{ '--registration-background': `url('${registrationBackground}')` }"
+        aria-labelledby="registration-page-heading"
+      >
+        <div class="page-frame registration-page__grid">
+          <div class="registration-page__copy">
             <p class="eyebrow eyebrow--light">Registro de visita</p>
-            <h2>Gracias por compartir este momento.</h2>
-            <p>Completa tus datos en menos de un minuto. Nos ayuda a conocerte y a seguir en contacto despues de tu visita.</p>
+            <h1 id="registration-page-heading">Registra tu visita</h1>
+            <p>Gracias por visitarnos. Completa tus datos para dejar registrado tu paso por {{ tenant.name }}.</p>
           </div>
           <RegistrationForm v-reveal :tenant="tenant" />
         </div>
@@ -109,6 +72,6 @@ watchEffect(() => {
   <main v-else class="missing-tenant page-frame">
     <p class="eyebrow">Bodega no disponible</p>
     <h1>No encontramos esta experiencia.</h1>
-    <RouterLink class="button button--primary" to="/bodega/bodega-aurora">Ver ejemplo</RouterLink>
+    <RouterLink class="button button--primary" to="/bodega/bodega-aurora/registro">Ir al registro</RouterLink>
   </main>
 </template>

@@ -2858,3 +2858,88 @@ body {
     margin: 7px 0 0;
   }
 }
+
+.registration-page {
+  position: relative;
+  display: grid;
+  min-height: calc(100vh - 82px);
+  align-items: center;
+  padding: clamp(32px, 5vw, 72px) 0;
+  isolation: isolate;
+  background-color: var(--color-primary-dark);
+}
+
+.registration-page::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-image:
+    linear-gradient(90deg, rgba(12, 34, 27, 0.9), rgba(12, 34, 27, 0.76)),
+    var(--registration-background);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  content: '';
+}
+
+.registration-page__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(32px, 7vw, 96px);
+  align-items: center;
+}
+
+.registration-page__copy {
+  max-width: 440px;
+  color: #fff;
+}
+
+.registration-page__copy h1 {
+  margin-bottom: 20px;
+  color: #fff;
+  font-size: clamp(43px, 5.2vw, 68px);
+  letter-spacing: -0.06em;
+  line-height: 0.98;
+  text-wrap: balance;
+}
+
+.registration-page__copy > p:last-child {
+  max-width: 360px;
+  margin-bottom: 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.registration-page .registration-form {
+  width: 100%;
+  background: var(--color-surface);
+}
+
+@media (max-width: 800px) {
+  .registration-page {
+    min-height: 0;
+    padding: 34px 0 48px;
+  }
+
+  .registration-page::before {
+    background-image:
+      linear-gradient(180deg, rgba(12, 34, 27, 0.82), rgba(12, 34, 27, 0.94)),
+      var(--registration-background);
+    background-position: center 35%;
+  }
+
+  .registration-page__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .registration-page__copy h1 {
+    margin-bottom: 12px;
+    font-size: clamp(40px, 11vw, 56px);
+  }
+
+  .registration-page__copy > p:last-child {
+    font-size: 14px;
+  }
+}

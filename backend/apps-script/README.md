@@ -2,7 +2,7 @@
 
 Este proyecto recibe solicitudes firmadas por la funcion serverless y escribe cada registro en la planilla privada de la bodega indicada.
 
-La hoja `Registros` conserva los campos base y agrega datos del visitante como apellido, ciudad, pais, red social, intereses, origen de llegada y consentimiento comercial. El JSON completo de `fields` tambien se conserva para permitir nuevos campos sin perder informacion.
+La hoja `Registros` conserva nombre, apellido, correo, teléfono, origen y consentimientos. La ubicación, identificador del QR y consentimiento opcional de marketing también se incluyen en `fields_json`. Las columnas antiguas de ciudad, país, redes, intereses y origen declarado se mantienen para compatibilidad con planillas existentes, pero quedan vacías en los registros nuevos.
 
 ## Propiedades requeridas
 

@@ -23,7 +23,7 @@ defineProps({
         <span v-if="tenant.contact.schedule">{{ tenant.contact.schedule }}</span>
         <span v-if="tenant.contact.email">{{ tenant.contact.email }}</span>
         <RouterLink :to="{ name: 'tenant-registration', params: { slug: tenant.slug } }">
-          Ir al registro de visita
+          Registrar mi visita
         </RouterLink>
       </address>
     </div>

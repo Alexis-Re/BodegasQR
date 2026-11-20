@@ -8,7 +8,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/bodega/bodega-aurora'
+      redirect: '/bodega/bodega-aurora/registro'
     },
     {
       path: '/bodega/:slug',

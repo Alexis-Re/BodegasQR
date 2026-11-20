@@ -15,12 +15,6 @@ function createInitialForm() {
     surname: '',
     email: '',
     phone: '',
-    city: '',
-    country: '',
-    socialNetwork: '',
-    socialHandle: '',
-    interest: '',
-    discoverySource: '',
     consent: false,
     marketingConsent: false,
     website: ''
@@ -48,15 +42,6 @@ function fieldId(field) {
 function clearError(fieldName) {
   if (errors[fieldName]) {
     delete errors[fieldName]
-  }
-}
-
-function handleFieldChange(field) {
-  clearError(field.name)
-
-  if (field.name === 'socialNetwork' && !isFieldVisible(props.tenant.form.fields.find((item) => item.name === 'socialHandle'))) {
-    form.socialHandle = ''
-    clearError('socialHandle')
   }
 }
 
@@ -127,12 +112,6 @@ async function handleSubmit() {
       surname: normalizedValue(form.surname),
       email: normalizedValue(form.email).toLowerCase(),
       phone: normalizedValue(form.phone),
-      city: normalizedValue(form.city),
-      country: form.country,
-      socialNetwork: form.socialNetwork,
-      socialHandle: normalizedValue(form.socialHandle),
-      interest: form.interest,
-      discoverySource: form.discoverySource,
       marketingConsent: form.marketingConsent,
       qrLocation: query.get('location') || '',
       qrId: query.get('qr') || ''
@@ -180,7 +159,7 @@ async function handleSubmit() {
           :aria-required="field.required"
           :aria-invalid="Boolean(errors[field.name])"
           :aria-describedby="errors[field.name] ? `${fieldId(field)}-error` : undefined"
-          @change="handleFieldChange(field)"
+          @change="clearError(field.name)"
         >
           <option value="">Selecciona una opcion</option>
           <option v-for="option in field.options" :key="option.value" :value="option.value">

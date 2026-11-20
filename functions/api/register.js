@@ -42,19 +42,28 @@ function isValidPayload(payload) {
   if (payload.fields.surname.length > 80) return false
   if (typeof payload.fields.email !== 'string' || !/^\S+@\S+\.\S+$/.test(payload.fields.email)) return false
   if (payload.fields.email.length > 120) return false
-  if (typeof payload.fields.phone !== 'string' || payload.fields.phone.length > 30) return false
-  if (typeof payload.fields.city !== 'string' || payload.fields.city.trim().length < 2) return false
-  if (payload.fields.city.length > 80) return false
-  if (typeof payload.fields.country !== 'string' || !payload.fields.country.trim() || payload.fields.country.length > 40) return false
-  if (typeof payload.fields.socialNetwork !== 'string' || payload.fields.socialNetwork.length > 40) return false
-  if (typeof payload.fields.socialHandle !== 'string' || payload.fields.socialHandle.length > 160) return false
-  if (typeof payload.fields.interest !== 'string' || payload.fields.interest.length > 60) return false
-  if (typeof payload.fields.discoverySource !== 'string' || payload.fields.discoverySource.length > 60) return false
+  if (typeof payload.fields.phone !== 'string' || !payload.fields.phone.trim() || payload.fields.phone.length > 30) return false
   if (typeof payload.fields.marketingConsent !== 'boolean') return false
   if (typeof payload.fields.qrLocation !== 'string' || payload.fields.qrLocation.length > 80) return false
   if (typeof payload.fields.qrId !== 'string' || payload.fields.qrId.length > 120) return false
 
   return true
+}
+
+function keepRegisteredFields(fields) {
+  const allowedFields = [
+    'name',
+    'surname',
+    'email',
+    'phone',
+    'marketingConsent',
+    'qrLocation',
+    'qrId'
+  ]
+
+  return Object.fromEntries(
+    Object.entries(fields).filter(([fieldName]) => allowedFields.includes(fieldName))
+  )
 }
 
 export async function onRequestPost({ request, env }) {
@@ -77,6 +86,8 @@ export async function onRequestPost({ request, env }) {
   if (!isValidPayload(payload)) {
     return jsonResponse({ ok: false, code: 'INVALID_PAYLOAD', message: 'Los datos enviados no son validos.' }, 400)
   }
+
+  payload.fields = keepRegisteredFields(payload.fields)
 
   const timestamp = Date.now()
   const message = JSON.stringify({ timestamp, payload })

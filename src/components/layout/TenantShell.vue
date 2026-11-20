@@ -72,13 +72,13 @@ onBeforeUnmount(() => {
           <img :src="tenant.assets.logo" :alt="`Logo de ${tenant.name}`" />
           <span>
             <strong>{{ tenant.shortName }}</strong>
-            <small>Vino · paisaje · encuentro</small>
+            <small>Registro de visitantes</small>
           </span>
         </a>
 
-        <span class="header-status" aria-label="Experiencia de demostración">
+        <span class="header-status" aria-label="Registro de visitantes">
           <i aria-hidden="true"></i>
-          Experiencia de muestra
+          Registro de visitantes
         </span>
 
         <button
@@ -109,7 +109,7 @@ onBeforeUnmount(() => {
           >
             {{ item.navLabel }}
           </a>
-          <a class="nav-cta" href="#registro" @click="closeMenu">Solicitar visita</a>
+          <a class="nav-cta" href="#registro" @click="closeMenu">Registrar mi visita</a>
         </nav>
       </div>
     </header>

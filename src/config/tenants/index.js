@@ -41,7 +41,6 @@ const bodegaAurora = {
   },
   contact: {
     address: 'Valle de Uco, Mendoza (dato de muestra)',
-    schedule: 'Consultar disponibilidad (dato de muestra)',
     email: 'Completar con el contacto oficial antes de publicar'
   },
   seo: {
@@ -52,16 +51,15 @@ const bodegaAurora = {
   footerNote: 'Bodega de demostración: actualiza los datos de contacto antes de publicar.',
   form: {
     id: 'bodega-aurora-visita',
-    title: 'Cuéntanos de tu visita',
-    description:
-      'Déjanos tus datos para que podamos conocer tu interés. El envío se confirmará únicamente cuando el servicio de registros esté configurado.',
+    title: 'Completa tu registro',
+    description: 'Registra tu visita a Bodega Aurora. El envío se confirmará cuando quede guardado correctamente.',
     consentLabel:
-      'Acepto que mis datos se utilicen para gestionar esta solicitud de visita.',
+      'Acepto que mis datos se utilicen para registrar mi visita en la bodega.',
     marketingConsentLabel:
       'Quiero recibir novedades y comunicaciones de la bodega.',
-    submitLabel: 'Enviar solicitud',
-    successMessage: 'Recibimos tu solicitud. ¡Gracias por tu interés!',
-    defaultSource: 'landing',
+    submitLabel: 'Registrar mi visita',
+    successMessage: 'Tu visita quedó registrada. ¡Gracias por visitarnos!',
+    defaultSource: 'direct',
     fields: [
       {
         name: 'name',
@@ -90,84 +88,12 @@ const bodegaAurora = {
       },
       {
         name: 'phone',
-        label: 'Teléfono (opcional)',
+        label: 'Teléfono',
         type: 'tel',
         autocomplete: 'tel',
         inputmode: 'tel',
-        required: false,
+        required: true,
         maxLength: 30
-      },
-      {
-        name: 'city',
-        label: 'Ciudad',
-        type: 'text',
-        autocomplete: 'address-level2',
-        required: true,
-        maxLength: 80
-      },
-      {
-        name: 'country',
-        label: 'País',
-        type: 'select',
-        autocomplete: 'country-name',
-        required: true,
-        options: [
-          { value: 'Argentina', label: 'Argentina' },
-          { value: 'Chile', label: 'Chile' },
-          { value: 'Uruguay', label: 'Uruguay' },
-          { value: 'Brasil', label: 'Brasil' },
-          { value: 'Otro', label: 'Otro' }
-        ]
-      },
-      {
-        name: 'socialNetwork',
-        label: 'Red social (opcional)',
-        type: 'select',
-        required: false,
-        options: [
-          { value: 'instagram', label: 'Instagram' },
-          { value: 'tiktok', label: 'TikTok' },
-          { value: 'facebook', label: 'Facebook' },
-          { value: 'otra', label: 'Otra' }
-        ]
-      },
-      {
-        name: 'socialHandle',
-        label: 'Usuario o perfil (opcional)',
-        type: 'text',
-        autocomplete: 'username',
-        required: false,
-        maxLength: 160,
-        showWhen: {
-          field: 'socialNetwork',
-          values: ['instagram', 'tiktok', 'facebook', 'otra']
-        }
-      },
-      {
-        name: 'interest',
-        label: '¿Qué te interesa conocer? (opcional)',
-        type: 'select',
-        required: false,
-        wide: true,
-        options: [
-          { value: 'recorrido', label: 'Recorrido por la bodega' },
-          { value: 'degustacion', label: 'Degustación' },
-          { value: 'paisaje', label: 'Paisaje y viñedos' },
-          { value: 'otro', label: 'Otra experiencia' }
-        ]
-      },
-      {
-        name: 'discoverySource',
-        label: '¿Cómo nos encontraste? (opcional)',
-        type: 'select',
-        required: false,
-        wide: true,
-        options: [
-          { value: 'qr', label: 'Código QR' },
-          { value: 'redes', label: 'Redes sociales' },
-          { value: 'recomendacion', label: 'Recomendación' },
-          { value: 'otro', label: 'Otro medio' }
-        ]
       }
     ]
   },
@@ -182,7 +108,7 @@ const bodegaAurora = {
           'Una invitación a descubrir los viñedos, los sabores y la calma del Valle de Uco.',
         imageAlt: 'Paisaje ilustrado de viñedos y montañas al atardecer',
         primaryActionLabel: 'Conoce la experiencia',
-        secondaryActionLabel: 'Solicita una visita',
+        secondaryActionLabel: 'Registra tu visita',
         mark: 'A',
         markLabel: 'Valle de Uco',
         sideIndex: '01',
@@ -231,17 +157,12 @@ const bodegaAurora = {
         ]
       },
       {
-        type: 'visit',
+        type: 'registration',
         id: 'registro',
-        navLabel: 'Tu visita',
-        eyebrow: 'Planifica tu visita',
-        title: 'El próximo encuentro puede empezar aquí.',
-        text:
-          'Cuéntanos qué te gustaría conocer. Esta página es una demostración; la solicitud solo se guardará cuando el servicio de registros esté configurado.',
-        facts: [
-          { label: 'Ubicación de muestra', value: 'Valle de Uco, Mendoza' },
-          { label: 'Disponibilidad', value: 'Consultar antes de publicar' }
-        ]
+        navLabel: 'Registro',
+        eyebrow: 'Registro en la bodega',
+        title: 'Deja tu visita registrada.',
+        text: 'Si ya estás en Bodega Aurora, completa el formulario para registrar tu visita.'
       }
     ]
 }
