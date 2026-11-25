@@ -67,6 +67,7 @@ const bodegaAurora = {
         type: 'text',
         autocomplete: 'given-name',
         required: true,
+        minLength: 2,
         maxLength: 60
       },
       {
@@ -75,7 +76,17 @@ const bodegaAurora = {
         type: 'text',
         autocomplete: 'family-name',
         required: true,
+        minLength: 2,
         maxLength: 80
+      },
+      {
+        name: 'city',
+        label: 'Ciudad',
+        type: 'text',
+        autocomplete: 'address-level2',
+        required: true,
+        minLength: 2,
+        maxLength: 100
       },
       {
         name: 'email',
@@ -88,12 +99,29 @@ const bodegaAurora = {
       },
       {
         name: 'phone',
-        label: 'Teléfono',
+        label: 'Celular',
         type: 'tel',
         autocomplete: 'tel',
         inputmode: 'tel',
         required: true,
         maxLength: 30
+      },
+      {
+        name: 'socialNetworks',
+        label: 'Redes sociales',
+        type: 'text',
+        autocomplete: 'off',
+        required: false,
+        maxLength: 120
+      },
+      {
+        name: 'postalAddress',
+        label: 'Dirección postal',
+        type: 'text',
+        autocomplete: 'street-address',
+        required: false,
+        maxLength: 180,
+        wide: true
       }
     ]
   },
@@ -160,9 +188,9 @@ const bodegaAurora = {
         type: 'registration',
         id: 'registro',
         navLabel: 'Registro',
-        eyebrow: 'Registro en la bodega',
-        title: 'Deja tu visita registrada.',
-        text: 'Si ya estás en Bodega Aurora, completa el formulario para registrar tu visita.'
+        eyebrow: 'Registro de visita',
+        title: 'Registra tu visita en Aurora.',
+        text: 'Completa tus datos en unos segundos. Nos alegra que estés aquí.'
       }
     ]
 }

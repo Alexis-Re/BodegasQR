@@ -13,8 +13,11 @@ function createInitialForm() {
   return {
     name: '',
     surname: '',
+    city: '',
     email: '',
     phone: '',
+    socialNetworks: '',
+    postalAddress: '',
     consent: false,
     marketingConsent: false,
     website: ''
@@ -54,6 +57,11 @@ function validate() {
 
     if (field.required && !value) {
       errors[field.name] = field.requiredMessage || `Completa ${field.label.toLowerCase()}.`
+      return
+    }
+
+    if (value && field.minLength && String(value).trim().length < field.minLength) {
+      errors[field.name] = `Completa ${field.label.toLowerCase()} con al menos ${field.minLength} caracteres.`
       return
     }
 
@@ -110,8 +118,11 @@ async function handleSubmit() {
     fields: {
       name: normalizedValue(form.name),
       surname: normalizedValue(form.surname),
+      city: normalizedValue(form.city),
       email: normalizedValue(form.email).toLowerCase(),
       phone: normalizedValue(form.phone),
+      socialNetworks: normalizedValue(form.socialNetworks),
+      postalAddress: normalizedValue(form.postalAddress),
       marketingConsent: form.marketingConsent,
       qrLocation: query.get('location') || '',
       qrId: query.get('qr') || ''

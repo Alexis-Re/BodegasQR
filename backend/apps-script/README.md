@@ -2,7 +2,7 @@
 
 Este proyecto recibe solicitudes firmadas por la funcion serverless y escribe cada registro en la planilla privada de la bodega indicada.
 
-La hoja `Registros` conserva nombre, apellido, correo, teléfono, origen y consentimientos. La ubicación, identificador del QR y consentimiento opcional de marketing también se incluyen en `fields_json`. Las columnas antiguas de ciudad, país, redes, intereses y origen declarado se mantienen para compatibilidad con planillas existentes, pero quedan vacías en los registros nuevos.
+La hoja `Registros` conserva nombre, apellido, ciudad, correo electrónico, celular, origen y consentimientos. Ciudad, correo y celular son obligatorios; Redes sociales y Dirección postal son opcionales. Ciudad, redes sociales y dirección postal se escriben en `city`, `social_network` y `postal_address`. La ubicación, identificador del QR y todos los campos del formulario también se incluyen en `fields_json`. Las columnas antiguas de país, usuario de red social, intereses y origen declarado se mantienen para compatibilidad y quedan vacías en los registros nuevos.
 
 ## Propiedades requeridas
 

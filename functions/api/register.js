@@ -40,9 +40,13 @@ function isValidPayload(payload) {
   if (payload.fields.name.length > 60) return false
   if (typeof payload.fields.surname !== 'string' || payload.fields.surname.trim().length < 2) return false
   if (payload.fields.surname.length > 80) return false
+  if (typeof payload.fields.city !== 'string' || payload.fields.city.trim().length < 2) return false
+  if (payload.fields.city.length > 100) return false
   if (typeof payload.fields.email !== 'string' || !/^\S+@\S+\.\S+$/.test(payload.fields.email)) return false
   if (payload.fields.email.length > 120) return false
   if (typeof payload.fields.phone !== 'string' || !payload.fields.phone.trim() || payload.fields.phone.length > 30) return false
+  if (typeof payload.fields.socialNetworks !== 'string' || payload.fields.socialNetworks.length > 120) return false
+  if (typeof payload.fields.postalAddress !== 'string' || payload.fields.postalAddress.length > 180) return false
   if (typeof payload.fields.marketingConsent !== 'boolean') return false
   if (typeof payload.fields.qrLocation !== 'string' || payload.fields.qrLocation.length > 80) return false
   if (typeof payload.fields.qrId !== 'string' || payload.fields.qrId.length > 120) return false
@@ -54,8 +58,11 @@ function keepRegisteredFields(fields) {
   const allowedFields = [
     'name',
     'surname',
+    'city',
     'email',
     'phone',
+    'socialNetworks',
+    'postalAddress',
     'marketingConsent',
     'qrLocation',
     'qrId'

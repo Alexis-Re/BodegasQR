@@ -110,9 +110,10 @@ social_handle
 interest
 discovery_source
 marketing_consent
+postal_address
 ```
 
-Las columnas de ciudad, país, redes, intereses y origen declarado se conservan por compatibilidad con registros anteriores. El formulario ya no recopila esos datos y las filas nuevas las dejan vacías. `fields_json` contiene los campos actuales del formulario y los metadatos del QR.
+Las columnas `city`, `email` y `phone` reciben ciudad, correo electrónico y celular; ciudad, correo y celular son obligatorios en el formulario. `social_network` y `postal_address` guardan los campos opcionales Redes sociales y Dirección postal. Las columnas de país, usuario de red social, intereses y origen declarado se conservan por compatibilidad con registros anteriores y quedan vacías en los registros nuevos. `fields_json` contiene los campos del formulario y los metadatos del QR.
 
 Cada bodega mantiene sus propios registros en su propio archivo. La plataforma no necesita una hoja global con datos mezclados.
 

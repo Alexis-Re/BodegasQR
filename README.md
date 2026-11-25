@@ -20,7 +20,7 @@ La primera ruta contiene información de la bodega. La segunda muestra el formul
 
 ## Estado del registro
 
-El registro pide nombre, apellido, correo y teléfono. La ubicación y el identificador del QR se capturan mediante los parámetros `location` y `qr`; el consentimiento de marketing es opcional e independiente.
+El registro pide nombre, apellido, ciudad, correo electrónico y celular como campos obligatorios. Redes sociales y dirección postal son opcionales. La ubicación y el identificador del QR se capturan mediante los parámetros `location` y `qr`; el consentimiento de marketing es opcional e independiente del consentimiento requerido para registrar la visita.
 
 Mientras no exista `VITE_REGISTRATION_API_URL`, la aplicacion informa que el backend no esta configurado y no confirma ningun registro.
 

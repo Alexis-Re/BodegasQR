@@ -63,13 +63,14 @@ function doPost(event) {
         payload.consent === true,
         safeCellValue_(payload.requestId),
         safeCellValue_(payload.fields.surname),
-        '', // Legacy city column; retained for existing sheets.
+        safeCellValue_(payload.fields.city),
         '', // Legacy country column; retained for existing sheets.
-        '', // Legacy social_network column; no longer collected.
+        safeCellValue_(payload.fields.socialNetworks),
         '', // Legacy social_handle column; no longer collected.
         '', // Legacy interest column; no longer collected.
         '', // Legacy discovery_source column; QR metadata is recorded separately.
-        payload.fields.marketingConsent === true
+        payload.fields.marketingConsent === true,
+        safeCellValue_(payload.fields.postalAddress)
       ]);
       SpreadsheetApp.flush();
 
@@ -91,14 +92,20 @@ function validatePayload_(payload) {
   if (payload.honeypot) throw new Error('Rejected request');
   if (payload.consent !== true) throw new Error('Consent required');
   if (!payload.fields || typeof payload.fields !== 'object') throw new Error('Invalid fields');
-  var allowedFields = ['name', 'surname', 'email', 'phone', 'marketingConsent', 'qrLocation', 'qrId'];
+  var allowedFields = [
+    'name', 'surname', 'city', 'email', 'phone', 'socialNetworks', 'postalAddress',
+    'marketingConsent', 'qrLocation', 'qrId'
+  ];
   Object.keys(payload.fields).forEach(function(fieldName) {
     if (allowedFields.indexOf(fieldName) === -1) throw new Error('Unexpected field');
   });
   if (String(payload.fields.name || '').trim().length < 2 || String(payload.fields.name).length > 60) throw new Error('Invalid name');
   if (String(payload.fields.surname || '').trim().length < 2 || String(payload.fields.surname).length > 80) throw new Error('Invalid surname');
+  if (typeof payload.fields.city !== 'string' || payload.fields.city.trim().length < 2 || payload.fields.city.length > 100) throw new Error('Invalid city');
   if (!/^\S+@\S+\.\S+$/.test(String(payload.fields.email || '')) || String(payload.fields.email).length > 120) throw new Error('Invalid email');
   if (!String(payload.fields.phone || '').trim() || String(payload.fields.phone).length > 30) throw new Error('Invalid phone');
+  if (typeof payload.fields.socialNetworks !== 'string' || payload.fields.socialNetworks.length > 120) throw new Error('Invalid social networks');
+  if (typeof payload.fields.postalAddress !== 'string' || payload.fields.postalAddress.length > 180) throw new Error('Invalid postal address');
   if (typeof payload.fields.marketingConsent !== 'boolean') throw new Error('Invalid marketing consent');
   if (String(payload.fields.qrLocation || '').length > 80) throw new Error('Invalid QR location');
   if (String(payload.fields.qrId || '').length > 120) throw new Error('Invalid QR id');
@@ -125,7 +132,8 @@ function getOrCreateRecordsSheet_(spreadsheet) {
      'social_handle',
      'interest',
      'discovery_source',
-     'marketing_consent'
+     'marketing_consent',
+     'postal_address'
    ];
 
    if (!sheet) {
