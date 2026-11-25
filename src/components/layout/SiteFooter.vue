@@ -16,6 +16,14 @@ defineProps({
           {{ tenant.footerNote || tenant.description }}
         </p>
         <p class="footer-credit">Una experiencia creada para <strong>Bodega QR</strong>.</p>
+        <p class="footer-credit footer-author">
+          <a href="https://wa.me/5493513446349" target="_blank" rel="noopener noreferrer">
+            Hecho por Alexis Re
+          </a>
+          <a href="https://wa.me/5493513446349" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp al +54 9 351 344-6349">
+            +54 9 351 344-6349
+          </a>
+        </p>
       </div>
 
       <address class="footer-contact">

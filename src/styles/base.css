@@ -755,6 +755,18 @@ h1 {
   font-weight: 600;
 }
 
+.footer-author {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+}
+
+.footer-author a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 .footer-contact {
   display: flex;
   flex-direction: column;

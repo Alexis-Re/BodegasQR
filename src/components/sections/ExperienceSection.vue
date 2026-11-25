@@ -22,10 +22,9 @@ const backgroundStyle = computed(() => {
     :class="{ 'experience-section--image': section.backgroundImage }"
     :style="backgroundStyle"
     :aria-labelledby="`${section.id}-heading`"
-    v-reveal
   >
     <div class="page-frame">
-      <div class="section-intro">
+      <div class="section-intro" v-reveal:left>
         <p class="eyebrow">{{ section.eyebrow }}</p>
         <h2 :id="`${section.id}-heading`">{{ section.title }}</h2>
         <p class="section-intro__text">{{ section.text }}</p>
@@ -38,10 +37,23 @@ const backgroundStyle = computed(() => {
           class="experience-card"
           v-reveal
         >
-          <span class="experience-card__number">0{{ index + 1 }}</span>
-          <span class="experience-card__dot" aria-hidden="true"></span>
-          <h3>{{ card.title }}</h3>
-          <p>{{ card.text }}</p>
+          <figure class="experience-card__media" :aria-hidden="!card.image">
+            <img
+              v-if="card.image"
+              :src="card.image"
+              :alt="card.imageAlt || ''"
+              :style="card.imagePosition ? { objectPosition: card.imagePosition } : undefined"
+              loading="lazy"
+              decoding="async"
+            />
+            <span class="experience-card__number" aria-hidden="true">0{{ index + 1 }}</span>
+          </figure>
+
+          <div class="experience-card__body">
+            <h3>{{ card.title }}</h3>
+            <span class="experience-card__rule" aria-hidden="true"></span>
+            <p>{{ card.text }}</p>
+          </div>
         </article>
       </div>
     </div>

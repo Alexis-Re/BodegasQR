@@ -8,9 +8,9 @@ defineProps({
 </script>
 
 <template>
-  <section :id="section.id" class="content-section visit-section" :aria-labelledby="`${section.id}-heading`" v-reveal>
+  <section :id="section.id" class="content-section visit-section" :aria-labelledby="`${section.id}-heading`">
     <div class="page-frame visit-section__grid">
-      <div class="visit-section__copy section-intro">
+      <div class="visit-section__copy section-intro" v-reveal:left>
         <p class="eyebrow">{{ section.eyebrow }}</p>
         <h2 :id="`${section.id}-heading`">{{ section.title }}</h2>
         <p class="section-intro__text">{{ section.text }}</p>
@@ -24,7 +24,7 @@ defineProps({
         <p class="footer-note">{{ tenant.contact.email }}</p>
       </div>
 
-      <RegistrationForm :tenant="tenant" />
+      <RegistrationForm v-reveal:right :tenant="tenant" />
     </div>
   </section>
 </template>

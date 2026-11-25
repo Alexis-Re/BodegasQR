@@ -134,7 +134,9 @@ const bodegaAurora = {
         title: 'El paisaje también se disfruta sin prisa.',
         tagline:
           'Una invitación a descubrir los viñedos, los sabores y la calma del Valle de Uco.',
-        imageAlt: 'Paisaje ilustrado de viñedos y montañas al atardecer',
+        image: '/tenants/bodega-aurora/uvas-vinedo.webp',
+        imagePosition: '68% center',
+        imageAlt: 'Racimos de uva junto a las hileras del viñedo, con luz de tarde',
         primaryActionLabel: 'Conoce la experiencia',
         secondaryActionLabel: 'Registra tu visita',
         mark: 'A',
@@ -165,22 +167,28 @@ const bodegaAurora = {
         id: 'experiencias',
         navLabel: 'Experiencias',
         eyebrow: 'Una visita a tu ritmo',
-        backgroundImage: '/tenants/bodega-aurora/experiencia-visita.webp',
         title: 'Pequeños detalles que hacen especial el recorrido.',
         text:
           'Explora distintas formas de acercarte a la cultura del vino y al paisaje que la inspira.',
         cards: [
           {
             title: 'El recorrido',
-            text: 'Conoce los espacios y las etapas que dan forma a cada botella.'
+            text: 'Conoce los espacios y las etapas que dan forma a cada botella.',
+            image: '/tenants/bodega-aurora/hero.webp',
+            imageAlt: 'Casa de bodega y camino rodeado de viñedos al atardecer',
+            imagePosition: '50% 34%'
           },
           {
             title: 'Los aromas',
-            text: 'Acércate a los matices del vino en una experiencia guiada.'
+            text: 'Acércate a los matices del vino en una experiencia guiada.',
+            image: '/tenants/bodega-aurora/experiencia-visita.webp',
+            imageAlt: 'Una botella de vino se sirve durante una degustación entre viñedos'
           },
           {
             title: 'El paisaje',
-            text: 'Tómate un momento para contemplar los viñedos y la cordillera.'
+            text: 'Tómate un momento para contemplar los viñedos y la cordillera.',
+            image: '/tenants/bodega-aurora/paisaje-esencia.webp',
+            imageAlt: 'Hileras de viñedos y un árbol bajo la luz del Valle de Uco'
           }
         ]
       },

@@ -6,15 +6,15 @@ defineProps({
 </script>
 
 <template>
-  <section :id="section.id" class="content-section about-section" :aria-labelledby="`${section.id}-heading`" v-reveal>
+  <section :id="section.id" class="content-section about-section" :aria-labelledby="`${section.id}-heading`">
     <div class="page-frame about-section__grid">
-      <div class="section-intro">
+      <div class="section-intro" v-reveal:left>
         <p class="eyebrow">{{ section.eyebrow }}</p>
         <h2 :id="`${section.id}-heading`">{{ section.title }}</h2>
         <p class="section-intro__text">{{ section.text }}</p>
       </div>
 
-      <div class="about-section__aside">
+      <div class="about-section__aside" v-reveal:right>
         <figure class="about-section__visual">
           <img :src="section.image || tenant.assets.about" :alt="section.imageAlt" loading="lazy" />
           <figcaption class="about-section__visual-label">{{ section.imageLabel }}</figcaption>

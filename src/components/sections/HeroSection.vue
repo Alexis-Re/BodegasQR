@@ -7,7 +7,8 @@ const props = defineProps({
 })
 
 const imageStyle = computed(() => ({
-  backgroundImage: `url("${props.section.image || props.tenant.assets.hero}")`
+  backgroundImage: `url("${props.section.image || props.tenant.assets.hero}")`,
+  backgroundPosition: props.section.imagePosition || 'center center'
 }))
 </script>
 

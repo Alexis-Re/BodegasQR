@@ -13,8 +13,10 @@ const props = defineProps({
 
 const route = useRoute()
 const menuOpen = ref(false)
+const isScrolled = ref(false)
 const headerElement = ref(null)
 const menuToggle = ref(null)
+let scrollFrame = 0
 const navigationId = computed(() => `${props.tenant.slug}-main-navigation`)
 const navigationItems = computed(() =>
   props.tenant.sections.filter((section) => section.id && section.navLabel)
@@ -55,18 +57,36 @@ function handleEscape() {
   menuToggle.value?.focus()
 }
 
+function handleScroll() {
+  if (scrollFrame) return
+
+  scrollFrame = window.requestAnimationFrame(() => {
+    isScrolled.value = window.scrollY > 48
+    scrollFrame = 0
+  })
+}
+
 onMounted(() => {
   document.addEventListener('pointerdown', handleDocumentPointerDown)
+  window.addEventListener('scroll', handleScroll, { passive: true })
+  handleScroll()
 })
 
 onBeforeUnmount(() => {
   document.removeEventListener('pointerdown', handleDocumentPointerDown)
+  window.removeEventListener('scroll', handleScroll)
+  if (scrollFrame) window.cancelAnimationFrame(scrollFrame)
 })
 </script>
 
 <template>
   <div class="tenant-site" :style="themeStyle">
-    <header ref="headerElement" class="site-header" @keydown.esc="handleEscape">
+    <header
+      ref="headerElement"
+      class="site-header"
+      :class="{ 'site-header--scrolled': isScrolled }"
+      @keydown.esc="handleEscape"
+    >
       <div class="page-frame site-header__inner">
         <a class="brand" href="#inicio" @click="closeMenu">
           <img :src="tenant.assets.logo" :alt="`Logo de ${tenant.name}`" />

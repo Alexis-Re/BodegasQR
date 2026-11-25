@@ -1,6 +1,10 @@
 const revealDirective = {
-  mounted(element) {
+  mounted(element, binding) {
     element.classList.add('reveal')
+
+    if (['left', 'right', 'scale'].includes(binding.arg)) {
+      element.classList.add(`reveal--${binding.arg}`)
+    }
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
       element.classList.add('is-visible')
